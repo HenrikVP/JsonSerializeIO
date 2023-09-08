@@ -4,6 +4,5 @@
     {
         public List<Instrument> Instruments { get; set; }
         public List<ComputerStuff> ComputerStuffList { get; set; }
-
     }
 }

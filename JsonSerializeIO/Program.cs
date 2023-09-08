@@ -4,6 +4,8 @@ namespace JsonSerializeIO
 {
     internal class Program
     {
+        static string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
         static void Main(string[] args)
         {
             List<Instrument> list = CreateList();
@@ -11,12 +13,23 @@ namespace JsonSerializeIO
 
             Inventory DTO = new() { Instruments = list, ComputerStuffList = csList };
             SaveListToFile(DTO);
+            string json = LoadFromFile("inventory.json");
+            Inventory? dto2 = JsonSerializer.Deserialize<Inventory>(json);
+        }
+
+        private static string LoadFromFile(string fileName)
+        {
+            string json;
+            using (StreamReader file = new StreamReader(Path.Combine(path, fileName)))
+            {
+                json = file.ReadToEnd();
+            };
+            return json;
         }
 
         private static void SaveListToFile(Inventory dto)
         {
             string json = JsonSerializer.Serialize(dto);
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
 
             using (StreamWriter file = new StreamWriter(Path.Combine(path, "inventory.json")))
             {

@@ -2,9 +2,10 @@
 {
     internal class Instrument
     {
+        public int NumOfInstruments;
         public Instrument()
         {
-            
+
         }
         public Instrument(int price, string type, string name, DateTime dateOfPurchase)
         {
